@@ -1,10 +1,11 @@
 import os
 import pathlib
+from pytube import YouTube
+import youtube_dl
 
 
 def _download_caption(youtube_link):
     # download the package by:  pip install pytube
-    from pytube import YouTube
 
     source = YouTube(youtube_link)
 
@@ -27,7 +28,6 @@ def _download_caption(youtube_link):
 
 
 def _download_youtube_video(youtube_link):
-    import youtube_dl
 
     ydl_opts = {'outtmpl': 'videos_data/%(id)s/full_video/%(id)s.%(ext)s', 'format': 'mp4'}
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
