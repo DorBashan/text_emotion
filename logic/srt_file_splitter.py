@@ -6,7 +6,7 @@ from models.srt_part import SrtPart
 class SrtFileSplitter:
 
     def split(self, srt_file_name) -> List[SrtPart]:
-        f = open(srt_file_name, "r")
+        f = open(srt_file_name, "r", encoding="utf8")
         line_reader = f.readlines()
         parts = []
 
@@ -36,4 +36,3 @@ class SrtFileSplitter:
 if __name__ == '__main__':
     spliter = SrtFileSplitter()
     spliter.split('resources/example_video.srt')
-
