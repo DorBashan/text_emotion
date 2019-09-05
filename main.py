@@ -27,7 +27,7 @@ if __name__ == '__main__':
         if not os.path.exists(wav_file):
             continue
         # call function
-        emotion = 'happy'
+        emotion = 'sad'
         parts_to_emotions[part] = emotion
 
     # use subtitles painter to get colors from emojits

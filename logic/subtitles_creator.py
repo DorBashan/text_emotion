@@ -32,30 +32,28 @@ class SubtitlesCreator:
             if index > 2:
                 if 'text' not in item:
                     item['text'] = []
-                item['text'].append(line)
+                item['text'].append(line.replace('\n',''))
             index = index + 1
 
         f = open(output_file_path, "w")
 
         for item in lst:
             i = item['index']
-            parts = [x for x in parts if x.get_index() == i]
-            if parts:
+            curr_part = [x for x in parts if x.get_index() == i]
+            if curr_part:
                 current_color = parts[0].get_color()
             else:
                 current_color = '#000000'
             color_line = '<font color="{}">'.format(current_color)
             close_color_line = '</font>'
-            f.writelines([str(i), item['time'], color_line])
-            f.writelines(item['time'])
-            f.writelines([str(i), item['time'], color_line])
-            f.writelines([str(i), item['time'], color_line])
-            f.writelines(item['text'])
-            f.writelines([close_color_line])
+            f.write(str(i) + '\n')
+            f.write(item['time'].replace('\n', '') + '\n')
+            f.write(color_line.replace('\n', '') + "\n")
+            f.write('\n'.join(item['text']))
+            f.write(close_color_line.replace('\n', '') + "\n")
+            f.write('\n')
 
         f.close()
-
-
 
         # copyfile(input_file_path, output_file_path)
         #
@@ -111,4 +109,3 @@ if __name__ == '__main__':
     part.set_index(1)
     l = [ColoredSrtPart(part, '#ff0000')]
     SubtitlesCreator.create('pulp_test.srt', 'output.srt', l)
-
