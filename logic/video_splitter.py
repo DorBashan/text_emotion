@@ -1,7 +1,7 @@
 import os
 import pathlib
 
-from moviepy.video.io.ffmpeg_tools import ffmpeg_extract_subclip
+from moviepy.video.io.ffmpeg_tools import ffmpeg_extract_subclip, ffmpeg_extract_audio
 
 from logic.srt_file_splitter import SrtFileSplitter
 
@@ -20,6 +20,16 @@ class VideoSplitter:
             ffmpeg_extract_subclip(video_file_path, start_seconds, end_seconds,
                                    targetname='%s/part_%s.mp4' % (full_directory,
                                                                   part.get_index()))
+            full_directory_wav = os.path.join(dir_path, "videos_data/%s/parts_wav" % video_name)
+            if not os.path.exists(full_directory_wav):
+                pathlib.Path(full_directory_wav).mkdir(parents=True, exist_ok=True)
+
+            try:
+                ffmpeg_extract_audio('%s/part_%s.mp4' % (full_directory,
+                                                         part.get_index()),
+                                     output='%s/part_%s.wav' % (full_directory_wav, part.get_index()))
+            except:
+                pass
 
     @staticmethod
     def convert_time_to_seconds(time_str):

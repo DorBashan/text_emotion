@@ -29,7 +29,7 @@ def _download_caption(youtube_link):
 
 def _download_youtube_video(youtube_link):
 
-    ydl_opts = {'outtmpl': 'videos_data/%(id)s/full_video/%(id)s.%(ext)s', 'format': 'mp4'}
+    ydl_opts = {'outtmpl': 'videos_data/%(id)s/full_video/%(id)s.%(ext)s', 'format': 'mp4','nocheckcertificate':True}
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
         ydl.download([youtube_link])
         return 'videos_data/%s/full_video/%s.mp4' % \
