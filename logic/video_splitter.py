@@ -1,3 +1,6 @@
+import os
+import pathlib
+
 from moviepy.video.io.ffmpeg_tools import ffmpeg_extract_subclip
 
 from logic.srt_file_splitter import SrtFileSplitter
@@ -5,13 +8,18 @@ from logic.srt_file_splitter import SrtFileSplitter
 
 class VideoSplitter:
 
-    def split(self, video_file_path, srt_parts):
+    def split(self, video_name, video_file_path, srt_parts):
         for part in srt_parts:
             start_seconds = self.convert_time_to_seconds(part.get_start())
             end_seconds = self.convert_time_to_seconds(part.get_end())
-
+            dir_path = os.path.abspath(os.curdir)
+            directory = "videos_data/%s/parts" % video_name
+            full_directory = os.path.join(dir_path, directory)
+            if not os.path.exists(full_directory):
+                pathlib.Path(full_directory).mkdir(parents=True, exist_ok=True)
             ffmpeg_extract_subclip(video_file_path, start_seconds, end_seconds,
-                                   targetname='logic/parts/part_{}.mp4'.format(part.get_index()))
+                                   targetname='%s/part_%s.mp4' % (full_directory,
+                                                                  part.get_index()))
 
     @staticmethod
     def convert_time_to_seconds(time_str):
@@ -21,6 +29,7 @@ class VideoSplitter:
         hours_to_seconds = int(splitted_time[0]) * 60 * 60
 
         return seconds + minutes_to_seconds + hours_to_seconds
+
 
 if __name__ == '__main__':
     srt_file_spliter = SrtFileSplitter()
