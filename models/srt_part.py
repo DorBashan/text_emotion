@@ -28,5 +28,11 @@ class SrtPart:
     def set_text(self, text):
         self.text = text
 
+    def add_text(self, text):
+        if text:
+            self.set_text(self.get_text() + '\n' + text)
+        else:
+            self.set_text(text)
+
     def get_text(self):
         return self.text

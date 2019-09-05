@@ -14,19 +14,20 @@ class SrtFileSplitter:
         srt_part = SrtPart()
         for line in line_reader:
             if line == '\n':
+                parts.append(srt_part)
+                srt_part = SrtPart()
+                index = 1
                 continue
-            if index % 3 == 1:
+            if index == 1:
                 srt_part.set_index(int(line))
-            if index % 3 == 2:
+            if index == 2:
                 divided_times = line.split('-->')
                 start_str = divided_times[0]
                 end_str = divided_times[1]
                 srt_part.set_start(start_str.split(',')[0].strip())
                 srt_part.set_end(end_str.split(',')[0].strip())
-            if index % 3 == 0:
-                srt_part.set_text(line)
-                parts.append(srt_part)
-                srt_part = SrtPart()
+            if index > 2:
+                srt_part.add_text(line)
 
             index = index + 1
         return parts

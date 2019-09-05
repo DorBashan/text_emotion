@@ -1,7 +1,5 @@
 from moviepy.video.io.ffmpeg_tools import ffmpeg_extract_subclip
 
-from logic.srt_file_splitter import SrtFileSplitter
-
 
 class VideoSplitter:
 
@@ -21,10 +19,3 @@ class VideoSplitter:
         hours_to_seconds = int(splitted_time[0]) * 60 * 60
 
         return seconds + minutes_to_seconds + hours_to_seconds
-
-if __name__ == '__main__':
-    srt_file_spliter = SrtFileSplitter()
-    srt_parts = srt_file_spliter.split('example_video.srt')
-
-    s = VideoSplitter()
-    s.split('example_video.mp4', srt_parts)
