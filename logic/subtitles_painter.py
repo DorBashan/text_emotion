@@ -5,7 +5,11 @@ from models.srt_part import SrtPart
 
 emotions_to_colors = {
     'happy': '#add8e6',
-    'sad': '#7fffd4'
+    'excited': '#add8e6',
+    'sad': '#7fffd4',
+    'frustration': '',
+    'neutral': '#ffffff',
+    'anger': '#ff0000'
 }
 
 

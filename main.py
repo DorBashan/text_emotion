@@ -1,5 +1,6 @@
 import os
 
+from logic.deep_effect import duplicate_wav, find_emotion
 from logic.srt_file_splitter import SrtFileSplitter
 from logic.subtitles_creator import SubtitlesCreator
 from logic.subtitles_painter import SubtitlesPainter
@@ -27,7 +28,8 @@ if __name__ == '__main__':
         if not os.path.exists(wav_file):
             continue
         # call function
-        emotion = 'sad'
+        duplicate_wav(wav_file, wav_file)
+        emotion = find_emotion(wav_file)
         parts_to_emotions[part] = emotion
 
     # use subtitles painter to get colors from emojits
