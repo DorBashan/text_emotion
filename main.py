@@ -9,5 +9,12 @@ if __name__ == '__main__':
     movie_path, sub_path = get_movie_and_sub_paths(youtube_link)
     srt_parts = srt_file_splitter.split(sub_path)
 
+    # split video to parts
     s = VideoSplitter()
     s.split(video_name, movie_path, srt_parts)
+
+    # take the parts and return srt_parts + emojis
+
+    # use subtitles painter to get colors from emojits
+
+    # use subtitles creator to create new srt file
