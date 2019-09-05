@@ -22,7 +22,7 @@ def get_emotion(part):
 
 if __name__ == '__main__':
     srt_file_splitter = SrtFileSplitter()
-    youtube_link = "https://www.youtube.com/watch?v=LBBni_-tMNs"
+    youtube_link = "https://www.youtube.com/watch?v=G7gklW3Xbn8"
     video_name = youtube_link.split('?v=')[1]
     movie_path, sub_path = get_movie_and_sub_paths(youtube_link)
     srt_parts = srt_file_splitter.split(sub_path)

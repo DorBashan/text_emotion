@@ -4,12 +4,12 @@ from models.colored_srt_part import ColoredSrtPart
 from models.srt_part import SrtPart
 
 emotions_to_colors = {
-    'happy': '#add8e6',
-    'excited': '#add8e6',
-    'sad': '#7fffd4',
-    'frustration': '#228B22',
-    'neutral': '#ffffff', #gray
-    'anger': '#ff0000' #red
+    'happy': '#ffea00',#yellow
+    'excited': '#ffc0cb', #pink
+    'sad': '#0080ff',#blue
+    'frustration': '#800080',#dark_purple
+    'neutral': '#808080', #gray
+    'anger': '#e60000' #red
 }
 
 
