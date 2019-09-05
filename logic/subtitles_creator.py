@@ -41,7 +41,7 @@ class SubtitlesCreator:
             i = item['index']
             curr_part = [x for x in parts if x.get_index() == i]
             if curr_part:
-                current_color = parts[0].get_color()
+                current_color = curr_part[0].get_color()
             else:
                 current_color = '#000000'
             color_line = '<font color="{}">'.format(current_color)

@@ -7,9 +7,22 @@ from logic.subtitles_painter import SubtitlesPainter
 from logic.video_splitter import VideoSplitter
 from logic.youtube_utils.yt_utils import get_movie_and_sub_paths
 
+
+def get_emotion(part):
+    i = part.get_index()
+    wav_file = os.path.join(dir_path, "videos_data/%s/parts_wav/part_%s.wav" % (video_name, i))
+    if not os.path.exists(wav_file):
+        return None
+    # call function
+    duplicate_wav(wav_file, wav_file)
+
+    emotion = find_emotion(wav_file)
+    return emotion
+
+
 if __name__ == '__main__':
     srt_file_splitter = SrtFileSplitter()
-    youtube_link = "https://www.youtube.com/watch?v=x2WK_eWihdU"
+    youtube_link = "https://www.youtube.com/watch?v=LBBni_-tMNs"
     video_name = youtube_link.split('?v=')[1]
     movie_path, sub_path = get_movie_and_sub_paths(youtube_link)
     srt_parts = srt_file_splitter.split(sub_path)
@@ -23,14 +36,7 @@ if __name__ == '__main__':
     # take the parts and return srt_parts + emojis
     dir_path = os.path.abspath(os.curdir)
     for part in srt_parts:
-        i = part.get_index()
-        wav_file = os.path.join(dir_path, "videos_data/%s/parts_wav/part_%s.wav" % (video_name, i))
-        if not os.path.exists(wav_file):
-            continue
-        # call function
-        duplicate_wav(wav_file, wav_file)
-        emotion = find_emotion(wav_file)
-        parts_to_emotions[part] = emotion
+        parts_to_emotions[part] = get_emotion(part)
 
     # use subtitles painter to get colors from emojits
     color_srt_parts = SubtitlesPainter.paint(parts_to_emotions)
